@@ -91,5 +91,5 @@ class Recognizer:
         return self.identify()
 
 if __name__ == "__main__":
-    face_recognizer = Recognizer("face_gallery", "ash.jpg", 1)
+    face_recognizer = Recognizer("face_gallery", "sample/obamas.jpg", 1)
     print(face_recognizer.startEngine())
