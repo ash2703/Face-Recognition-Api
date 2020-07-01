@@ -1,5 +1,6 @@
-face_recognition
-opencv
 numpy
-dlib
+opencv-python
+Flask
 cmake
+dlib
+face_recognition
