@@ -6,7 +6,7 @@ import face_database
 class Recognizer:
     def __init__(self, path, image, show = None):
         self.path = path
-        self.frame = cv2.imread(image)
+        self.frame = face_recognition.load_image_file(image)
         self.show = show
         self.known_face_names = []
         self.known_face_encodings = []
@@ -73,6 +73,7 @@ class Recognizer:
             left *= 4
 
             # Draw a box around the face
+            self.frame = cv2.cvtColor(self.frame, cv2.COLOR_RGB2BGR)
             cv2.rectangle(self.frame, (left, top), (right, bottom), (0, 0, 255), 2)
 
             # Draw a label with a name below the face
@@ -81,15 +82,14 @@ class Recognizer:
             cv2.putText(self.frame, name, (left + 6, bottom - 6), font, 1.0, (255, 255, 255), 1)
 
             # Display the resulting image
-            cv2.imshow('Video', frame)
+            cv2.imshow('Video', self.frame)
             cv2.waitKey(0)
         cv2.destroyAllWindows()
     
     def startEngine(self):
-        # self.processImage()
         self.loadDatabase()
-        self.identify()
+        return self.identify()
 
 if __name__ == "__main__":
-    face_recognizer = Recognizer("face_gallery", "ash.jpg")
-    face_recognizer.startEngine()
+    face_recognizer = Recognizer("face_gallery", "ash.jpg", 1)
+    print(face_recognizer.startEngine())
