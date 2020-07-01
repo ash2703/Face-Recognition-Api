@@ -45,7 +45,7 @@ class FaceDatabase:
                     raise Exception
                     # log.error("error raised {}".format(e))
         self.serializeDatabase()
-        return self.labels, self.encodings
+        return self.labels, np.array(self.encodings)
     
     def get_encodings(self):
         db = self.filesModified()
@@ -62,7 +62,7 @@ class FaceDatabase:
     def serializeDatabase(self):
         dbfile = open('database', 'wb') 
         # source, destination 
-        pickle.dump((self.checksum, self.labels, self.encodings), dbfile)                     
+        pickle.dump((self.checksum, self.labels, np.array(self.encodings)), dbfile)                     
         dbfile.close() 
 
     def deSerializeDatabase(self):
@@ -78,7 +78,6 @@ class FaceDatabase:
             # print(db[0], self.checksum)
             if db[0] == self.checksum:   #hash matches
                 return db
-            # return db[0]
         return False
 
 
@@ -102,5 +101,5 @@ if __name__ == "__main__":
     face_database = FaceDatabase("face_gallery")
     labels, encoding = face_database.get_encodings()
     print(labels)
-    print(len(encoding), len(encoding[0][0]))
+    print(len(encoding), len(encoding[0][0]), type(encoding))
     # face_database.deSerializeDatabase()
