@@ -71,7 +71,7 @@ python recognizer.py
 
 ```bash
 python api.py   #Run the api
-curl -XPOST -F "file=@obamas.jpg" http://127.0.0.1:5001
+curl -XPOST -F "file=@sample/obamas.jpg" http://127.0.0.1:5001
 ```
 
 

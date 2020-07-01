@@ -43,7 +43,7 @@ def upload_image():
 
 def detect_faces_in_image(file_stream):
     result = {}
-    face_recognizer = Recognizer("face_gallery", file_stream,1)
+    face_recognizer = Recognizer("face_gallery", file_stream)
     locs, names = face_recognizer.startEngine()
     for loc, name in zip(locs, names):
         result[name] = loc
